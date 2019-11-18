@@ -1,15 +1,14 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+
 class LeakyIntegrateAndFire(object):
     """
     Creates an integrate-and-fire model.
     """
     def __init__(self, **kwargs):
         """
-        Initializes the model. The default parameters produce the closest behavior to a neuron
-        depolarization.
-        
+        Initializes the model.
         Args:
             VR (int, float): Resting state potential.
             R (int, float): Resistance of the cell membrane.
@@ -26,57 +25,66 @@ class LeakyIntegrateAndFire(object):
         self.theta = kwargs.get("theta", -55)
         self.dt = kwargs.get("dt", 0.01)
         self.t = kwargs.get("t", 100)
-        self.check_parameters() # Check if the inputs have the correct format
+        self.check_parameters()  # Check if the inputs have the correct format
+
     @property
     def tau(self):
         """
         Calculates tau given R and C.
         """
         return self.R * self.C
+
     @property
     def tvec(self):
         """
         Calculates a time vector tvec.
         """
         return np.arange(0, self.t, self.dt)
+
     @property
     def period(self):
         """
         Calculates the period given the model parameters.
         """
         return -self.tau * np.log(1 - (self.theta-self.VR)/(self.R*self.I))
+
     @property
     def frequency(self):
         """
         Calculates the frequency given the period.
         """
         return 1 / self.period
+
     def __repr__(self):
         """
         Visualize model parameters when printing.
         """
         return ("LeakyIntegrateAndFire(VR={}, R={}, C={}, tau={}, "
                 "I={}, theta={}, dt={}, t={}, "
-                "T={}, f={})").format(self.VR, self.R, self.C, self.tau, 
-                                      self.I, self.theta, self.dt, self.t, 
-                                      round(self.period,3), round(self.frequency,3))
+                "T={}, f={})").format(self.VR, self.R, self.C, self.tau,
+                                      self.I, self.theta, self.dt, self.t,
+                                      round(self.period, 3),
+                                      round(self.frequency, 3))
+
     def check_parameters(self):
         """
         Verify the data types of the inputs.
         """
         assert isinstance(self.VR, (int, float)), \
-               "The resting voltage (VR) has to be a number."
+            "The resting voltage (VR) has to be a number."
         assert isinstance(self.I, (int, float)), \
-               "The current (I) has to be a number."
+            "The current (I) has to be a number."
         assert isinstance(self.R, (int, float)), \
-               "The resistance (R) has to be a number."
+            "The resistance (R) has to be a number."
         assert isinstance(self.C, (int, float)), \
-               "The capacitance (C) has to be a number."
+            "The capacitance (C) has to be a number."
         assert isinstance(self.dt, (int, float)), \
-               "The step (dt) has to be a number."
-        assert isinstance(self.t, (int, float)), "The time (t) has to be a number."
+            "The step (dt) has to be a number."
+        assert isinstance(self.t, (int, float)), \
+            "The time (t) has to be a number."
         assert isinstance(self.theta, (int, float)), \
-               "The threshold (theta) has to be a number."
+            "The threshold (theta) has to be a number."
+
     def run(self):
         """
         Run the model.
@@ -88,16 +96,18 @@ class LeakyIntegrateAndFire(object):
             step += self.dt
             if self.V[idx] > self.theta:
                 step = 0
+
     def plot(self):
         """
         Plot the membrane potential over time.
         """
-        assert hasattr(self, 'V'), "Run the model first to calculate V over time."
-        plt.figure(figsize=(8,5))
+        assert hasattr(self, 'V'), "Run the model to calculate V over time."
+        plt.figure(figsize=(8, 5))
         plt.plot(self.tvec, self.V, color='royalblue')
-        plt.plot(self.tvec, np.repeat(self.theta, len(self.V)), color='lightcoral', linestyle='--')
-        plt.xlabel('time [ms]', fontsize=12)
-        plt.ylabel('voltage [mV]', fontsize=12);
+        plt.plot(self.tvec, np.repeat(self.theta, len(self.V)),
+                 color='lightcoral', linestyle='--')
+        plt.xlabel('time [t]', fontsize=12)
+        plt.ylabel('Voltage [V]', fontsize=12)
         plt.grid(alpha=0.3)
         plt.show()
 

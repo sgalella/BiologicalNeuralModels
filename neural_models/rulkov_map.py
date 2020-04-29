@@ -9,7 +9,7 @@ class RulkovMap(object):
     def __init__(self, **kwargs):
         """
         Initializes the model.
-        
+
         Args:
             alpha (int, float): Variable alpha.
             mu (int, float): Variable mu.

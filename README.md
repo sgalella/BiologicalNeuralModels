@@ -13,7 +13,12 @@ Collection of  different biological neuron models including the following:
 
 6. Rulkov map
 
-   
+
+<p align="center">
+    <img width="500" height="300"src="images/morris-lecar-hopf.gif">
+</p>
+
+
 
 ## Installation
 

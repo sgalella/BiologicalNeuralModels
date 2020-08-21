@@ -1,22 +1,16 @@
 # Biological Neural Models
-Collection of  different biological neuron models including the following:
+Collection of  different biological neuron models.
 
-1. FitzHugh-Nagumo model
+<p align="center">
+    <img width="344" height="312"src="images/table.png">
+</p>
 
-2. Hindmarsh-Rose model
-
-3. Hodgkin-Huxley model
-
-4. Integrate-and-Fire model
-
-5. Morris-Lecar model
-
-6. Rulkov map
 
 
 <p align="center">
     <img width="500" height="300"src="images/morris-lecar-hopf.gif">
 </p>
+
 
 
 

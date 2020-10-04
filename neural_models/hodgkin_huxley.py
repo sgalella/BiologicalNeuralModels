@@ -2,7 +2,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.integrate import odeint
 
-class HodgkinHuxley(object):
+
+class HodgkinHuxley:
     """
     Creates a HodgkinHuxley model.
     """
@@ -77,7 +78,6 @@ class HodgkinHuxley(object):
                 (0.1*(X[0]+40)/(1-np.exp(-(X[0]+40)/10)))*(1-X[1])-(4*np.exp(-(X[0]+65)/18))*X[1],
                 (0.01*(X[0]+55)/(1-np.exp(-(X[0]+55)/10)))*(1-X[2])-(0.125*np.exp(-(X[0]+65)/80))*X[2],
                 (0.07*np.exp(-(X[0]+65)/20))*(1-X[3])-(1/(1+np.exp(-(X[0]+35)/10)))*X[3]] 
-    
 
     def run(self, X0 = [0, 0, 0, 0], I=None):
         """
@@ -121,6 +121,7 @@ class HodgkinHuxley(object):
         ax4.set_ylabel("h(t)", fontsize=12)
         ax4.set_ylim([-0.05, 1.05])
         ax4.grid(alpha=0.3)
+        
     def phase_plane(self):
         """
         Plots the phase plane of the system.

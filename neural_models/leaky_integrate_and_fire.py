@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-class LeakyIntegrateAndFire(object):
+class LeakyIntegrateAndFire:
     """
     Creates an integrate-and-fire model.
     """
@@ -46,7 +46,7 @@ class LeakyIntegrateAndFire(object):
         """
         Calculates the period given the model parameters.
         """
-        return -self.tau * np.log(1 - (self.theta-self.VR)/(self.R*self.I))
+        return - self.tau * np.log(1 - (self.theta - self.VR) / (self.R * self.I))
 
     @property
     def frequency(self):
@@ -110,5 +110,3 @@ class LeakyIntegrateAndFire(object):
         plt.ylabel('Voltage [V]', fontsize=12)
         plt.grid(alpha=0.3)
         plt.show()
-
-

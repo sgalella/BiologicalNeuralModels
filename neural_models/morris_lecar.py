@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from scipy.integrate import odeint
 
 
-class MorrisLecar(object):
+class MorrisLecar:
     """
     Creates a MorrisLecar model.
     """

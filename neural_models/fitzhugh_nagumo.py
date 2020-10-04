@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from scipy.integrate import odeint
 
 
-class FitzHughNagumo(object):
+class FitzHughNagumo:
     """
     Creates a FitzHugh-Nagumo model.
     """

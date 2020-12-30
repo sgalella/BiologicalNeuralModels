@@ -24,6 +24,7 @@ class RulkovMap(object):
         self.time = kwargs.get("time", 100)
         self.x0 = kwargs.get("x0", 0)
         self.y0 = kwargs.get("x0", 0)
+        self.check_parameters()  # Check if the inputs have the correct format
 
     def __repr__(self):
         """

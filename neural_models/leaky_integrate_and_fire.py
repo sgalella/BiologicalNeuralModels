@@ -25,6 +25,7 @@ class LeakyIntegrateAndFire:
         self.theta = kwargs.get("theta", -55)
         self.dt = kwargs.get("dt", 0.01)
         self.t = kwargs.get("t", 100)
+        self.check_parameters()  # Check if the inputs have the correct format
 
     @property
     def tau(self):
@@ -72,7 +73,7 @@ class LeakyIntegrateAndFire:
         self.V = np.zeros(self.tvec.shape)
         step = 0
         for idx in range(len(self.tvec)):
-            self.V[idx] = self.VR + self.R*self.I*(1-np.exp(-step/(self.tau)))
+            self.V[idx] = self.VR + self.R * self.I * (1 - np.exp(-step / (self.tau)))
             step += self.dt
             if self.V[idx] > self.theta:
                 step = 0

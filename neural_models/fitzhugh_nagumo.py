@@ -37,15 +37,15 @@ class FitzHughNagumo:
         """
         Defines the equations of the dynamical system for integration.
         """
-        return [X[0] - (X[0]**3)/3 - X[1] + self.I,
-                self.phi*(X[0] + self.a - self.b*X[1])]
+        return [X[0] - (X[0]**3) / 3 - X[1] + self.I,
+                self.phi * (X[0] + self.a - self.b * X[1])]
 
     def run(self):
         """
         Run the model by integrating the system numerically.
         """
         X0 = [0, 0]
-        self.tvec = np.arange(0, self.t,  self.dt)
+        self.tvec = np.arange(0, self.t, self.dt)
         X = odeint(self.system_equations, X0, self.tvec)
         self.V, self.W = X[:, 0], X[:, 1]
 
@@ -64,7 +64,7 @@ class FitzHughNagumo:
         ax2.plot(self.tvec, self.W, color='goldenrod')
         ax2.set_ylabel('Recovery [W]', fontsize=12)
         # Within potential limits
-        ax2.set_ylim([np.floor(min(self.W)-1), np.ceil(max(self.W))])
+        ax2.set_ylim([np.floor(min(self.W) - 1), np.ceil(max(self.W))])
         ax2.tick_params(axis='y', labelcolor='goldenrod')
         plt.grid(alpha=0.3)
 
@@ -74,8 +74,8 @@ class FitzHughNagumo:
         """
         plt.figure(figsize=(8, 5))
         plt.plot(self.V, self.W, color='cornflowerblue')
-        plt.plot(self.V, self.V - (self.V**3)/3 + self.I, color="slateblue")
-        plt.plot(self.V, (self.V + self.a)/(self.b), color="red")
+        plt.plot(self.V, self.V - (self.V ** 3) / 3 + self.I, color="slateblue")
+        plt.plot(self.V, (self.V + self.a) / (self.b), color="red")
         plt.xlabel('Voltage [V]', fontsize=12)
         plt.ylabel('Recovery [W]', fontsize=12)
         plt.grid(alpha=0.3)

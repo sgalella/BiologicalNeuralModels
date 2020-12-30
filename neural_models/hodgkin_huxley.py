@@ -41,19 +41,19 @@ class HodgkinHuxley:
         """
         return ("HodgkinHuxley(C={}, I={}, "
                 "VNa={}, VK={}, VL={} "
-                "gNa={}, gK={}, gL={})").format(self.C, self.I, self.VNa, self.VK, self.VL, 
+                "gNa={}, gK={}, gL={})").format(self.C, self.I, self.VNa, self.VK, self.VL,
                                                 self.gNa, self.gK, self.gL)
-        
+
     def system_equations(self, X, t, I):
         """
         Defines the equations of the dynamical system for integration.
         """
-        return [(1/self.C)*(-self.gNa*(X[1]**3)*X[3]*(X[0]-self.VNa)-self.gK*(X[2]**4)*(X[0]-self.VK)-self.gL*(X[0]-self.VL)+I),
-                (0.1*(X[0]+40)/(1-np.exp(-(X[0]+40)/10)))*(1-X[1])-(4*np.exp(-(X[0]+65)/18))*X[1],
-                (0.01*(X[0]+55)/(1-np.exp(-(X[0]+55)/10)))*(1-X[2])-(0.125*np.exp(-(X[0]+65)/80))*X[2],
-                (0.07*np.exp(-(X[0]+65)/20))*(1-X[3])-(1/(1+np.exp(-(X[0]+35)/10)))*X[3]] 
+        return [(1 / self.C) * (-self.gNa * (X[1] ** 3) * X[3] * (X[0] - self.VNa) - self.gK * (X[2] ** 4) * (X[0] - self.VK) - self.gL * (X[0] - self.VL) + I),
+                (0.1 * (X[0] + 40) / (1 - np.exp(-(X[0] + 40) / 10))) * (1 - X[1]) - (4 * np.exp(-(X[0] + 65) / 18)) * X[1],
+                (0.01 * (X[0] + 55) / (1 - np.exp(-(X[0] + 55) / 10))) * (1 - X[2]) - (0.125 * np.exp(-(X[0] + 65) / 80)) * X[2],
+                (0.07 * np.exp(-(X[0] + 65) / 20)) * (1 - X[3]) - (1 / (1 + np.exp(-(X[0] + 35) / 10))) * X[3]]
 
-    def run(self, X0 = [0, 0, 0, 0], I=None):
+    def run(self, X0=[0, 0, 0, 0], I=None):
         """
         Run the model by integrating the system numerically.
         """
@@ -61,16 +61,16 @@ class HodgkinHuxley:
             I = self.I
         else:
             self.I = I
-        X  = odeint(self.system_equations, X0, self.tvec, (I,))
+        X = odeint(self.system_equations, X0, self.tvec, (I,))
         self.V, self.m, self.n, self.h = X[:, 0], X[:, 1], X[:, 2], X[:, 3]
-        
+
     def plot(self):
         """
         Plot the membrane potential over time as well as the activation and innactivation of the channels.
         """
-        f, [[ax1, ax2],[ax3, ax4]] = plt.subplots(2, 2, figsize=(9,6))
+        f, [[ax1, ax2], [ax3, ax4]] = plt.subplots(2, 2, figsize=(9, 6))
         f.subplots_adjust(wspace=.3, hspace=.3)
-        # Plot V(t) 
+        # Plot V(t)
         ax1.plot(self.tvec, self.V, color='royalblue')
         ax1.set_title("V", fontsize=15)
         ax1.set_ylabel("Voltage [mV]", fontsize=12)
@@ -95,12 +95,12 @@ class HodgkinHuxley:
         ax4.set_ylabel("h(t)", fontsize=12)
         ax4.set_ylim([-0.05, 1.05])
         ax4.grid(alpha=0.3)
-        
+
     def phase_plane(self):
         """
         Plots the phase plane of the system.
         """
-        f, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(13,3))
+        f, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(13, 3))
         f.subplots_adjust(wspace=.3)
         # Plot m over Voltage
         ax1.plot(self.V, self.m, color='royalblue')

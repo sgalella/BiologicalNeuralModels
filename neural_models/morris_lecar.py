@@ -102,7 +102,7 @@ class MorrisLecar:
         """
         Plots the phase plane of the system.
         """
-        f = plt.figure(figsize=(7, 4))
+        plt.figure(figsize=(7, 4))
         # Plot N over Voltage
         plt.plot(self.V, self.N, color='royalblue')
         plt.xlabel("Voltage [mV]", fontsize=12)

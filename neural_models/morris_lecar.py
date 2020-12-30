@@ -59,7 +59,7 @@ class MorrisLecar:
         """
         return np.arange(0, self.time, self.dt)
 
-    def system_equations(self, X, t, current):
+    def _system_equations(self, X, t, current):
         """
         Defines the equations of the dynamical system for integration.
         """
@@ -78,7 +78,7 @@ class MorrisLecar:
             current = self.current
         else:
             self.current = current
-        X = odeint(self.system_equations, X0, self.tvec, (current,))
+        X = odeint(self._system_equations, X0, self.tvec, (current,))
         self.V, self.N = X[:, 0], X[:, 1]
 
     def plot(self):

@@ -44,7 +44,7 @@ class HodgkinHuxley:
                 "gNa={}, gK={}, gL={})").format(self.C, self.current, self.VNa, self.VK, self.VL,
                                                 self.gNa, self.gK, self.gL)
 
-    def system_equations(self, X, t, current):
+    def _system_equations(self, X, t, current):
         """
         Defines the equations of the dynamical system for integration.
         """
@@ -61,7 +61,7 @@ class HodgkinHuxley:
             current = self.current
         else:
             self.current = current
-        X = odeint(self.system_equations, X0, self.tvec, (current,))
+        X = odeint(self._system_equations, X0, self.tvec, (current,))
         self.V, self.m, self.n, self.h = X[:, 0], X[:, 1], X[:, 2], X[:, 3]
 
     def plot(self):

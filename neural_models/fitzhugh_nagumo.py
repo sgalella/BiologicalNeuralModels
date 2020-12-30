@@ -33,7 +33,7 @@ class FitzHughNagumo:
         return ("FitzHughNagumo(a={}, b={}, "
                 "current={}, phi={})").format(self.a, self.b, self.current, self.phi)
 
-    def system_equations(self, X, t=0):
+    def _system_equations(self, X, t=0):
         """
         Defines the equations of the dynamical system for integration.
         """
@@ -46,7 +46,7 @@ class FitzHughNagumo:
         """
         X0 = [0, 0]
         self.tvec = np.arange(0, self.t, self.dt)
-        X = odeint(self.system_equations, X0, self.tvec)
+        X = odeint(self._system_equations, X0, self.tvec)
         self.V, self.W = X[:, 0], X[:, 1]
 
     def plot(self):

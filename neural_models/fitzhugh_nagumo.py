@@ -21,7 +21,7 @@ class FitzHughNagumo:
         """
         self.a = kwargs.get("a", -0.7)
         self.b = kwargs.get("b", 0.8)
-        self.I = kwargs.get("I", 0.5)
+        self.current = kwargs.get("current", 0.5)
         self.phi = kwargs.get("phi", 12.5)
         self.dt = kwargs.get("dt", 0.01)
         self.t = kwargs.get("t", 100)
@@ -31,13 +31,13 @@ class FitzHughNagumo:
         Visualize model parameters when printing.
         """
         return ("FitzHughNagumo(a={}, b={}, "
-                "I={}, phi={})").format(self.a, self.b, self.I, self.phi)
+                "current={}, phi={})").format(self.a, self.b, self.current, self.phi)
 
     def system_equations(self, X, t=0):
         """
         Defines the equations of the dynamical system for integration.
         """
-        return [X[0] - (X[0]**3) / 3 - X[1] + self.I,
+        return [X[0] - (X[0]**3) / 3 - X[1] + self.current,
                 self.phi * (X[0] + self.a - self.b * X[1])]
 
     def run(self):
@@ -74,7 +74,7 @@ class FitzHughNagumo:
         """
         plt.figure(figsize=(8, 5))
         plt.plot(self.V, self.W, color='cornflowerblue')
-        plt.plot(self.V, self.V - (self.V ** 3) / 3 + self.I, color="slateblue")
+        plt.plot(self.V, self.V - (self.V ** 3) / 3 + self.current, color="slateblue")
         plt.plot(self.V, (self.V + self.a) / (self.b), color="red")
         plt.xlabel('Voltage [V]', fontsize=12)
         plt.ylabel('Recovery [W]', fontsize=12)

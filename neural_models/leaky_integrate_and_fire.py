@@ -13,7 +13,7 @@ class LeakyIntegrateAndFire:
             VR (int, float): Resting state potential.
             R (int, float): Resistance of the cell membrane.
             C (int, float): Capacitance of the cell membrane.
-            I (int, float): External current.
+            current (int, float): External current.
             dt (int, float): Simulation step.
             t (int): Total time for the simulation.
             threshold
@@ -21,11 +21,10 @@ class LeakyIntegrateAndFire:
         self.VR = kwargs.get("VR", -70)
         self.R = kwargs.get("R", 100)
         self.C = kwargs.get("C", 0.3)
-        self.I = kwargs.get("I", 0.3)
+        self.current = kwargs.get("current", 0.3)
         self.theta = kwargs.get("theta", -55)
         self.dt = kwargs.get("dt", 0.01)
         self.t = kwargs.get("t", 100)
-        self.check_parameters()  # Check if the inputs have the correct format
 
     @property
     def tau(self):
@@ -46,7 +45,7 @@ class LeakyIntegrateAndFire:
         """
         Calculates the period given the model parameters.
         """
-        return - self.tau * np.log(1 - (self.theta - self.VR) / (self.R * self.I))
+        return - self.tau * np.log(1 - (self.theta - self.VR) / (self.R * self.current))
 
     @property
     def frequency(self):
@@ -62,7 +61,7 @@ class LeakyIntegrateAndFire:
         return ("LeakyIntegrateAndFire(VR={}, R={}, C={}, tau={}, "
                 "I={}, theta={}, dt={}, t={}, "
                 "T={}, f={})").format(self.VR, self.R, self.C, self.tau,
-                                      self.I, self.theta, self.dt, self.t,
+                                      self.current, self.theta, self.dt, self.t,
                                       round(self.period, 3),
                                       round(self.frequency, 3))
 
@@ -73,7 +72,7 @@ class LeakyIntegrateAndFire:
         self.V = np.zeros(self.tvec.shape)
         step = 0
         for idx in range(len(self.tvec)):
-            self.V[idx] = self.VR + self.R * self.I * (1 - np.exp(-step / (self.tau)))
+            self.V[idx] = self.VR + self.R * self.current * (1 - np.exp(-step / (self.tau)))
             step += self.dt
             if self.V[idx] > self.theta:
                 step = 0

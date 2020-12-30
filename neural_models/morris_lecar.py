@@ -29,7 +29,7 @@ class MorrisLecar:
             time (int): Total time for the simulation.
         """
         self.C = kwargs.get("C", 20)
-        self.I = kwargs.get("I", 1)
+        self.current = kwargs.get("current", 1)
         self.VL = kwargs.get("VL", -60)
         self.VCa = kwargs.get("VCa", 120)
         self.VK = kwargs.get("VK", -84)
@@ -48,7 +48,7 @@ class MorrisLecar:
         """
         Visualize model parameters when printing.
         """
-        return (f"MorrisLecar(C={self.C}, I={self.I}, VL={self.VL}, VCa={self.VCa}, VK={self.VK}, "
+        return (f"MorrisLecar(C={self.C}, I={self.current}, VL={self.VL}, VCa={self.VCa}, VK={self.VK}, "
                 f"gL={self.gL}), gCa={self.gCa}, gK={self.gK}, V1={self.V1}, V2={self.V2}, "
                 f"V3={self.V3}, V4={self.V4}, phi={self.phi}, dt={self.dt}, time={self.time}")
 
@@ -59,7 +59,7 @@ class MorrisLecar:
         """
         return np.arange(0, self.time, self.dt)
 
-    def system_equations(self, X, t, I):
+    def system_equations(self, X, t, current):
         """
         Defines the equations of the dynamical system for integration.
         """
@@ -67,18 +67,18 @@ class MorrisLecar:
         Nss = (1 + np.tanh((X[0] - self.V3) / self.V4)) / 2
         tau = 1 / self.phi * (np.cosh((X[0] - self.V3) / (2 * self.V4)))
 
-        return [(1 / self.C) * (I - self.gL * (X[0] - self.VL) - self.gCa * Mss * (X[0] - self.VCa) - self.gK * X[1] * (X[0] - self.VK)),
+        return [(1 / self.C) * (current - self.gL * (X[0] - self.VL) - self.gCa * Mss * (X[0] - self.VCa) - self.gK * X[1] * (X[0] - self.VK)),
                 (Nss - X[1]) / tau]
 
-    def run(self, X0=[0, 0], I=None):
+    def run(self, X0=[0, 0], current=None):
         """
         Run the model by integrating the system numerically.
         """
-        if I is None:
-            I = self.I
+        if current is None:
+            current = self.current
         else:
-            self.I = I
-        X = odeint(self.system_equations, X0, self.tvec, (I,))
+            self.current = current
+        X = odeint(self.system_equations, X0, self.tvec, (current,))
         self.V, self.N = X[:, 0], X[:, 1]
 
     def plot(self):

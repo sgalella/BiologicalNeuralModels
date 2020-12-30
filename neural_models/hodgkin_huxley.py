@@ -13,7 +13,7 @@ class HodgkinHuxley:
 
         Args:
             C (int, float): Capacitance of the membrane.
-            I (int, float): External current.
+            current (int, float): External current.
             VNa (int, float): Potential Na.
             VK (int, float): Potential K.
             VL (int, float): Potential L.
@@ -24,7 +24,7 @@ class HodgkinHuxley:
             t (int): Total time for the simulation.
         """
         self.C = kwargs.get("C", 1)
-        self.I = kwargs.get("I", 1)
+        self.current = kwargs.get("current", 1)
         self.VNa = kwargs.get("VNa", 50)
         self.VK = kwargs.get("VK", -77)
         self.VL = kwargs.get("VL", -54.4)
@@ -41,27 +41,27 @@ class HodgkinHuxley:
         """
         return ("HodgkinHuxley(C={}, I={}, "
                 "VNa={}, VK={}, VL={} "
-                "gNa={}, gK={}, gL={})").format(self.C, self.I, self.VNa, self.VK, self.VL,
+                "gNa={}, gK={}, gL={})").format(self.C, self.current, self.VNa, self.VK, self.VL,
                                                 self.gNa, self.gK, self.gL)
 
-    def system_equations(self, X, t, I):
+    def system_equations(self, X, t, current):
         """
         Defines the equations of the dynamical system for integration.
         """
-        return [(1 / self.C) * (-self.gNa * (X[1] ** 3) * X[3] * (X[0] - self.VNa) - self.gK * (X[2] ** 4) * (X[0] - self.VK) - self.gL * (X[0] - self.VL) + I),
+        return [(1 / self.C) * (-self.gNa * (X[1] ** 3) * X[3] * (X[0] - self.VNa) - self.gK * (X[2] ** 4) * (X[0] - self.VK) - self.gL * (X[0] - self.VL) + current),
                 (0.1 * (X[0] + 40) / (1 - np.exp(-(X[0] + 40) / 10))) * (1 - X[1]) - (4 * np.exp(-(X[0] + 65) / 18)) * X[1],
                 (0.01 * (X[0] + 55) / (1 - np.exp(-(X[0] + 55) / 10))) * (1 - X[2]) - (0.125 * np.exp(-(X[0] + 65) / 80)) * X[2],
                 (0.07 * np.exp(-(X[0] + 65) / 20)) * (1 - X[3]) - (1 / (1 + np.exp(-(X[0] + 35) / 10))) * X[3]]
 
-    def run(self, X0=[0, 0, 0, 0], I=None):
+    def run(self, X0=[0, 0, 0, 0], current=None):
         """
         Run the model by integrating the system numerically.
         """
-        if I is None:
-            I = self.I
+        if current is None:
+            current = self.current
         else:
-            self.I = I
-        X = odeint(self.system_equations, X0, self.tvec, (I,))
+            self.current = current
+        X = odeint(self.system_equations, X0, self.tvec, (current,))
         self.V, self.m, self.n, self.h = X[:, 0], X[:, 1], X[:, 2], X[:, 3]
 
     def plot(self):

@@ -34,7 +34,6 @@ class HodgkinHuxley:
         self.dt = kwargs.get("dt", 0.01)
         self.t = kwargs.get("t", 100)
         self.tvec = np.arange(0, self.t, self.dt)
-        self.check_parameters()
 
     def __repr__(self):
         """
@@ -44,31 +43,6 @@ class HodgkinHuxley:
                 "VNa={}, VK={}, VL={} "
                 "gNa={}, gK={}, gL={})").format(self.C, self.I, self.VNa, self.VK, self.VL, 
                                                 self.gNa, self.gK, self.gL)
-    
-    def check_parameters(self):
-        """
-        Verify the data types of the inputs
-        """
-        assert isinstance(self.C, (int, float)), \
-            "The capacitance (C) has to be a number."
-        assert isinstance(self.I, (int, float)), \
-            "The current (I) has to be a number."
-        assert isinstance(self.VNa, (int, float)), \
-            "The potential of Na (VNa) a has to be a number."
-        assert isinstance(self.VK, (int, float)), \
-            "The potential of K (VK) has to be a number."
-        assert isinstance(self.VL, (int, float)), \
-            "The potential of L (VL) has to be a number."
-        assert isinstance(self.gNa, (int, float)), \
-            "The conductance of Na (gNa) has to be a number."
-        assert isinstance(self.gK, (int, float)), \
-            "The conductance of K (gK) has to be a number."
-        assert isinstance(self.gL, (int, float)), \
-            "The conductance of L (gL) has to be a number."
-        assert isinstance(self.dt, (int, float)), \
-            "The step (dt) has to be a number."
-        assert isinstance(self.t, (int, float)), \
-            "The time (t) has to be a number."
         
     def system_equations(self, X, t, I):
         """

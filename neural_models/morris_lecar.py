@@ -43,7 +43,6 @@ class MorrisLecar:
         self.phi = kwargs.get("phi", 0.06)
         self.dt = kwargs.get("dt", 0.01)
         self.time = kwargs.get("time", 100)
-        self.check_parameters()
 
     def __repr__(self):
         """
@@ -52,41 +51,6 @@ class MorrisLecar:
         return (f"MorrisLecar(C={self.C}, I={self.I}, VL={self.VL}, VCa={self.VCa}, VK={self.VK}, "
                 f"gL={self.gL}), gCa={self.gCa}, gK={self.gK}, V1={self.V1}, V2={self.V2}, "
                 f"V3={self.V3}, V4={self.V4}, phi={self.phi}, dt={self.dt}, time={self.time}")
-
-    def check_parameters(self):
-        """
-        Verify the data types of the inputs
-        """
-        assert isinstance(self.C, (int, float)), \
-            "The capacitance (C) has to be a number."
-        assert isinstance(self.I, (int, float)), \
-            "The current (I) has to be a number."
-        assert isinstance(self.VL, (int, float)), \
-            "The potential of L (VL) has to be a number."
-        assert isinstance(self.VCa, (int, float)), \
-            "The potential of Ca (VCa) a has to be a number."
-        assert isinstance(self.VK, (int, float)), \
-            "The potential of K (VK) has to be a number."
-        assert isinstance(self.gL, (int, float)), \
-            "The conductance of L (gL) has to be a number."
-        assert isinstance(self.gCa, (int, float)), \
-            "The conductance of Ca (gCa) has to be a number."
-        assert isinstance(self.gK, (int, float)), \
-            "The conductance of K (gK) has to be a number."
-        assert isinstance(self.V1, (int, float)), \
-            "The potential V1 has to be a number."
-        assert isinstance(self.V2, (int, float)), \
-            "The potential V2 has to be a number."
-        assert isinstance(self.V3, (int, float)), \
-            "The potential V3 has to be a number."
-        assert isinstance(self.V4, (int, float)), \
-            "The potential V4 has to be a number."
-        assert isinstance(self.phi, (int, float)), \
-            "The phi parameter has to be a number."
-        assert isinstance(self.dt, (int, float)), \
-            "The step (dt) has to be a number."
-        assert isinstance(self.time, (int, float)), \
-            "The time has to be a number."
 
     @property
     def tvec(self):

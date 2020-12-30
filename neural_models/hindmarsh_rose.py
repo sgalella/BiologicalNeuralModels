@@ -33,38 +33,12 @@ class HindmarshRose:
         self.x1 = kwargs.get("x1", -1)
         self.dt = kwargs.get("dt", 0.01)
         self.time = kwargs.get("time", 100)
-        self.check_parameters()
 
     def __repr__(self):
         """
         Visualize model parameters when printing.
         """
         return (f"HindmarshRose(a={self.a}, b={self.b}, c={self.c}, d={self.d}, dt={self.dt}, time={self.time})")
-
-    def check_parameters(self):
-        """
-        Verify the data types of the inputs
-        """
-        assert isinstance(self.I, (int, float)), \
-            "The current (I) has to be a number."
-        assert isinstance(self.a, (int, float)), \
-            "The parameter a has to be a number."
-        assert isinstance(self.b, (int, float)), \
-            "The parameter b has to be a number."
-        assert isinstance(self.c, (int, float)), \
-            "The parameter c has to be a number."
-        assert isinstance(self.d, (int, float)), \
-            "The parameter d has to be a number."
-        assert isinstance(self.r, (int, float)), \
-            "The parameter r has to be a number."
-        assert isinstance(self.x1, (int, float)), \
-            "The parameter x1 has to be a number."
-        assert isinstance(self.s, (int, float)), \
-            "The parameter s has to be a number."
-        assert isinstance(self.dt, (int, float)), \
-            "The step (dt) has to be a number."
-        assert isinstance(self.time, (int, float)), \
-            "The time has to be a number."
 
     @property
     def tvec(self):

@@ -25,7 +25,6 @@ class LeakyIntegrateAndFire:
         self.theta = kwargs.get("theta", -55)
         self.dt = kwargs.get("dt", 0.01)
         self.t = kwargs.get("t", 100)
-        self.check_parameters()  # Check if the inputs have the correct format
 
     @property
     def tau(self):
@@ -65,25 +64,6 @@ class LeakyIntegrateAndFire:
                                       self.I, self.theta, self.dt, self.t,
                                       round(self.period, 3),
                                       round(self.frequency, 3))
-
-    def check_parameters(self):
-        """
-        Verify the data types of the inputs.
-        """
-        assert isinstance(self.VR, (int, float)), \
-            "The resting voltage (VR) has to be a number."
-        assert isinstance(self.I, (int, float)), \
-            "The current (I) has to be a number."
-        assert isinstance(self.R, (int, float)), \
-            "The resistance (R) has to be a number."
-        assert isinstance(self.C, (int, float)), \
-            "The capacitance (C) has to be a number."
-        assert isinstance(self.dt, (int, float)), \
-            "The step (dt) has to be a number."
-        assert isinstance(self.t, (int, float)), \
-            "The time (t) has to be a number."
-        assert isinstance(self.theta, (int, float)), \
-            "The threshold (theta) has to be a number."
 
     def run(self):
         """

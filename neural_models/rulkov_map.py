@@ -24,30 +24,12 @@ class RulkovMap(object):
         self.time = kwargs.get("time", 100)
         self.x0 = kwargs.get("x0", 0)
         self.y0 = kwargs.get("x0", 0)
-        self.check_parameters()  # Check if the inputs have the correct format
 
     def __repr__(self):
         """
         Visualize model parameters when printing.
         """
         return (f"RulkovModel(alpha={self.alpha}, mu={self.mu}, sigma={self.sigma}, t={self.time})")
-
-    def check_parameters(self):
-        """
-        Verify the data types of the inputs.
-        """
-        assert isinstance(self.alpha, (int, float)),  \
-            "The parameter alpha has to be a number."
-        assert isinstance(self.mu, (int, float)),  \
-            "The parameter mu has to be a number."
-        assert isinstance(self.sigma, (int, float)),  \
-            "The parameter sigma has to be a number."
-        assert isinstance(self.time, (int, float)) and self.time > 0,  \
-            "The time has to be a positive number."
-        assert isinstance(self.x0, (int, float)),  \
-            "The initial membrane portential (x0) has to be a number."
-        assert isinstance(self.y0, (int, float)),  \
-            "The initial slow dynamics (y0) has to be a number."
 
     @property
     def tvec(self):

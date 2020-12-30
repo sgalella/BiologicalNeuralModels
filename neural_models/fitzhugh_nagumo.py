@@ -25,7 +25,6 @@ class FitzHughNagumo:
         self.phi = kwargs.get("phi", 12.5)
         self.dt = kwargs.get("dt", 0.01)
         self.t = kwargs.get("t", 100)
-        self.check_parameters()  # Check if the inputs have the correct format
 
     def __repr__(self):
         """
@@ -33,23 +32,6 @@ class FitzHughNagumo:
         """
         return ("FitzHughNagumo(a={}, b={}, "
                 "I={}, phi={})").format(self.a, self.b, self.I, self.phi)
-
-    def check_parameters(self):
-        """
-        Verify the data types of the inputs.
-        """
-        assert isinstance(self.a, (int, float)), \
-            "The parameter a has to be a number."
-        assert isinstance(self.b, (int, float)), \
-            "The parameter b has to be a number."
-        assert isinstance(self.I, (int, float)), \
-            "The current (I) has to be a number."
-        assert isinstance(self.phi, (int, float)), \
-            "The parameter phi has to be a number."
-        assert isinstance(self.dt, (int, float)), \
-            "The step (dt) has to be a number."
-        assert isinstance(self.t, (int, float)), \
-            "The time (t) has to be a number."
 
     def system_equations(self, X, t=0):
         """

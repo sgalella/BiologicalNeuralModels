@@ -1,5 +1,4 @@
 import numpy as np
-import matplotlib.pyplot as plt
 
 
 class LeakyIntegrateAndFire:
@@ -77,16 +76,3 @@ class LeakyIntegrateAndFire:
             if self.V[idx] > self.theta:
                 step = 0
 
-    def plot(self):
-        """
-        Plot the membrane potential over time.
-        """
-        assert hasattr(self, 'V'), "Run the model to calculate V over time."
-        plt.figure(figsize=(8, 5))
-        plt.plot(self.tvec, self.V, color='royalblue')
-        plt.plot(self.tvec, np.repeat(self.theta, len(self.V)),
-                 color='lightcoral', linestyle='--')
-        plt.xlabel('time [t]', fontsize=12)
-        plt.ylabel('Voltage [V]', fontsize=12)
-        plt.grid(alpha=0.3)
-        plt.show()

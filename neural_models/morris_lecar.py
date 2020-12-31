@@ -1,5 +1,4 @@
 import numpy as np
-import matplotlib.pyplot as plt
 from scipy.integrate import odeint
 
 
@@ -80,32 +79,3 @@ class MorrisLecar:
             self.current = current
         X = odeint(self._system_equations, X0, self.tvec, (current,))
         self.V, self.N = X[:, 0], X[:, 1]
-
-    def plot(self):
-        """
-        Plot the membrane potential over time as well as the activation and innactivation of the channels.
-        """
-        f, ([ax1, ax2]) = plt.subplots(1, 2, figsize=(13, 3))
-        # Plot V(t)
-        ax1.plot(self.tvec, self.V, color='royalblue')
-        ax1.set_title("V", fontsize=15)
-        ax1.set_ylabel("Voltage [mV]", fontsize=12)
-        ax1.grid(alpha=0.3)
-        # Plot N(t)
-        ax2.plot(self.tvec, self.N, color='lightcoral')
-        ax2.set_title("N", fontsize=15)
-        ax2.set_ylabel("N(t)", fontsize=12)
-        ax2.grid(alpha=0.3)
-        plt.show()
-
-    def phase_plane(self):
-        """
-        Plots the phase plane of the system.
-        """
-        plt.figure(figsize=(7, 4))
-        # Plot N over Voltage
-        plt.plot(self.V, self.N, color='royalblue')
-        plt.xlabel("Voltage [mV]", fontsize=12)
-        plt.ylabel("N", fontsize=12)
-        plt.grid(alpha=0.3)
-        plt.show()

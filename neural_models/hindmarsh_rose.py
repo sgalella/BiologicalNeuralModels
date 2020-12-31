@@ -1,5 +1,4 @@
 import numpy as np
-import matplotlib.pyplot as plt
 from scipy.integrate import odeint
 
 
@@ -65,45 +64,3 @@ class HindmarshRose:
             self.current = current
         X = odeint(self._system_equations, X0, self.tvec, (current,))
         self.x, self.y, self.z = X[:, 0], X[:, 1], X[:, 2]
-
-    def plot(self):
-        """
-        Plot the membrane potential over time as well as the activation and innactivation of the channels.
-        """
-        f, ([ax1, ax2, ax3]) = plt.subplots(1, 3, figsize=(13, 3), tight_layout=True)
-        # Plot x(t)
-        ax1.plot(self.tvec, self.x, color='royalblue')
-        ax1.set_title("x", fontsize=15)
-        ax1.set_xlabel("time [ms]", fontsize=12)
-        ax1.set_ylabel("x(t)", fontsize=12)
-        ax1.grid(alpha=0.3)
-        # Plot y(t)
-        ax2.plot(self.tvec, self.y, color='lightcoral')
-        ax2.set_title("y", fontsize=15)
-        ax2.set_xlabel("time [ms]", fontsize=12)
-        ax2.set_ylabel("y(t)", fontsize=12)
-        ax2.grid(alpha=0.3)
-        # Plot z(t)
-        ax3.plot(self.tvec, self.z, color='goldenrod')
-        ax3.set_title("z", fontsize=15)
-        ax3.set_xlabel("time [ms]", fontsize=12)
-        ax3.set_ylabel("z(t)", fontsize=12)
-        ax3.grid(alpha=0.3)
-        plt.show()
-
-    def phase_plane(self):
-        """
-        Plots the phase plane of the system.
-        """
-        f, ([ax1, ax2]) = plt.subplots(1, 2, figsize=(13, 3), tight_layout=True)
-        # Plot y over x
-        ax1.plot(self.x, self.y, color='royalblue')
-        ax1.set_xlabel("x", fontsize=12)
-        ax1.set_ylabel("y", fontsize=12)
-        ax1.grid(alpha=0.3)
-        # Plot z over x
-        ax2.plot(self.x, self.z, color='royalblue')
-        ax2.set_xlabel("x", fontsize=12)
-        ax2.set_ylabel("z", fontsize=12)
-        ax2.grid(alpha=0.3)
-        plt.show()

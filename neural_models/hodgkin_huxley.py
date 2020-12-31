@@ -1,5 +1,4 @@
 import numpy as np
-import matplotlib.pyplot as plt
 from scipy.integrate import odeint
 
 
@@ -63,57 +62,3 @@ class HodgkinHuxley:
             self.current = current
         X = odeint(self._system_equations, X0, self.tvec, (current,))
         self.V, self.m, self.n, self.h = X[:, 0], X[:, 1], X[:, 2], X[:, 3]
-
-    def plot(self):
-        """
-        Plot the membrane potential over time as well as the activation and innactivation of the channels.
-        """
-        f, [[ax1, ax2], [ax3, ax4]] = plt.subplots(2, 2, figsize=(9, 6))
-        f.subplots_adjust(wspace=.3, hspace=.3)
-        # Plot V(t)
-        ax1.plot(self.tvec, self.V, color='royalblue')
-        ax1.set_title("V", fontsize=15)
-        ax1.set_ylabel("Voltage [mV]", fontsize=12)
-        ax1.grid(alpha=0.3)
-        # Plot m(t)
-        ax2.plot(self.tvec, self.m, color='lightcoral')
-        ax2.set_title("m", fontsize=15)
-        ax2.set_ylabel("m(t)", fontsize=12)
-        ax2.set_ylim([-0.05, 1.05])
-        ax2.grid(alpha=0.3)
-        # Plot n(t)
-        ax3.plot(self.tvec, self.n, color='goldenrod')
-        ax3.set_title("n", fontsize=15)
-        ax3.set_xlabel("time [ms]", fontsize=12)
-        ax3.set_ylabel("n(t)", fontsize=12)
-        ax3.set_ylim([-0.05, 1.05])
-        ax3.grid(alpha=0.3)
-        # Plot h(t)
-        ax4.plot(self.tvec, self.h, color='yellowgreen')
-        ax4.set_title("h", fontsize=15)
-        ax4.set_xlabel("time [ms]", fontsize=12)
-        ax4.set_ylabel("h(t)", fontsize=12)
-        ax4.set_ylim([-0.05, 1.05])
-        ax4.grid(alpha=0.3)
-
-    def phase_plane(self):
-        """
-        Plots the phase plane of the system.
-        """
-        f, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(13, 3))
-        f.subplots_adjust(wspace=.3)
-        # Plot m over Voltage
-        ax1.plot(self.V, self.m, color='royalblue')
-        ax1.set_xlabel("Voltage [mV]", fontsize=12)
-        ax1.set_ylabel("m", fontsize=12)
-        ax1.grid(alpha=0.3)
-        # Plot n over Voltage
-        ax2.plot(self.V, self.n, color='royalblue')
-        ax2.set_xlabel("Voltage [mV]", fontsize=12)
-        ax2.set_ylabel("n", fontsize=12)
-        ax2.grid(alpha=0.3)
-        # Plot h over Voltage
-        ax3.plot(self.V, self.h, color='royalblue')
-        ax3.set_xlabel("Voltage [mV]", fontsize=12)
-        ax3.set_ylabel("h", fontsize=12)
-        ax3.grid(alpha=0.3)

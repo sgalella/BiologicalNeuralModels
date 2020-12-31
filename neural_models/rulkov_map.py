@@ -1,8 +1,7 @@
 import numpy as np
-import matplotlib.pyplot as plt
 
 
-class RulkovMap(object):
+class RulkovMap:
     """
     Creates a Rulkov Map model.
     """
@@ -54,18 +53,3 @@ class RulkovMap(object):
             elif self.x[t - 1] >= self.alpha + self.y[t - 1]:
                 self.x[t] = -1
             self.y[t] = self.y[t - 1] - self.mu * (self.x[t - 1] + 1) + self.mu * self.sigma
-
-    def plot(self):
-        """
-        Plot the membrane potential over time as well as the slow dynamics variable.
-        """
-        f, ax1 = plt.subplots(figsize=(12, 5))
-        ax1.plot(self.tvec, self.x, color="royalblue")
-        ax1.set_xlabel('time [t]', fontsize=12)
-        ax1.set_ylabel(r"$x_n$", fontsize=15)
-        ax1.tick_params(axis='y', labelcolor='royalblue')
-        plt.grid(alpha=0.3)
-        ax2 = ax1.twinx()
-        ax2.plot(self.tvec, self.y, color="goldenrod")
-        ax2.set_ylabel(r"$y_n$", fontsize=15)
-        ax2.tick_params(axis='y', labelcolor='goldenrod')

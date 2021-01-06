@@ -55,7 +55,7 @@ class Izhikevich:
             Y0 (list): Initial values of membrane potential and recovery variable.
         """
         tspan = (0, t)
-        s = solve_ivp(self._systems_equations, tspan, y0=Y0, args=(current, ), max_step=0.1)
+        s = solve_ivp(fun=lambda t, y: self._systems_equations(t, y, current), t_span=tspan, y0=Y0, max_step=0.1)
         self.tvec = s.t
         self.V = s.y[0, :]
         self.U = s.y[1, :]

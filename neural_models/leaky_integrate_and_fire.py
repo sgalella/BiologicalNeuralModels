@@ -12,45 +12,37 @@ class LeakyIntegrateAndFire:
             VR (int, float): Resting state potential.
             R (int, float): Resistance of the cell membrane.
             C (int, float): Capacitance of the cell membrane.
-            current (int, float): External current.
-            dt (int, float): Simulation step.
-            t (int): Total time for the simulation.
-            threshold
         """
         self.VR = kwargs.get("VR", -70)
         self.R = kwargs.get("R", 100)
         self.C = kwargs.get("C", 0.3)
-        self.current = kwargs.get("current", 0.3)
         self.theta = kwargs.get("theta", -55)
-        self.dt = kwargs.get("dt", 0.01)
-        self.t = kwargs.get("t", 100)
-
-    @property
-    def tau(self):
-        """
-        Calculates tau given R and C.
-        """
-        return self.R * self.C
-
-    @property
-    def tvec(self):
-        """
-        Calculates a time vector tvec.
-        """
-        return np.arange(0, self.t, self.dt)
+        self.t = None
+        self.dt = None
+        self.tvec = None
+        self.V = None
 
     def __repr__(self):
         """
         Visualize model parameters when printing.
         """
-        return ("LeakyIntegrateAndFire(VR={}, R={}, C={}, tau={}, "
-                "I={}, theta={}, dt={}, t={}, ").format(self.VR, self.R, self.C, self.tau,
-                                                        self.current, self.theta, self.dt, self.t)
+        return ("LeakyIntegrateAndFire(VR={}, R={}, C={}, "
+                "theta={}").format(self.VR, self.R, self.C, self.theta)
 
-    def run(self):
+    def run(self, current=1, t=100, dt=0.01):
         """
-        Run the model.
+        Runs the model.
+
+        Args:
+            current (int, optional): External current. Defaults to 1.
+            t (int, optional): Total time for the simulation. Defaults to 100.
+            dt (float, optional): Simulation step. Defaults to 0.01.
         """
+        self.current = current
+        self.t = t
+        self.dt = dt
+        self.tvec = np.arange(0, self.t, self.dt)
+        self.tau = self.R * self.C
         self.V = np.zeros(self.tvec.shape)
         step = 0
         for idx in range(len(self.tvec)):
@@ -58,4 +50,3 @@ class LeakyIntegrateAndFire:
             step += self.dt
             if self.V[idx] > self.theta:
                 step = 0
-

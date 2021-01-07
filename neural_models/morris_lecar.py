@@ -12,7 +12,6 @@ class MorrisLecar:
 
         Args:
             C (int, float): Capacitance of the membrane.
-            I (int, float): External current.
             VL (int, float): Potential L.
             VCa (int, float): Potential Ca.
             VK (int, float): Potential K.
@@ -24,8 +23,6 @@ class MorrisLecar:
             V3 (int, float): Potential at which Nss converges.
             V4 (int, float): Reciprocal of slope of Nss.
             phi (int, float): Time scale recovery.
-            dt (int, float): Simulation step.
-            time (int): Total time for the simulation.
         """
         self.C = kwargs.get("C", 20)
         self.current = kwargs.get("current", 1)
@@ -40,23 +37,19 @@ class MorrisLecar:
         self.V3 = kwargs.get("V3", 12)
         self.V4 = kwargs.get("V4", 17.4)
         self.phi = kwargs.get("phi", 0.06)
-        self.dt = kwargs.get("dt", 0.01)
-        self.time = kwargs.get("time", 100)
+        self.t = None
+        self.dt = None
+        self.tvec = None
+        self.V = None
+        self.N = None
 
     def __repr__(self):
         """
         Visualize model parameters when printing.
         """
-        return (f"MorrisLecar(C={self.C}, I={self.current}, VL={self.VL}, VCa={self.VCa}, VK={self.VK}, "
+        return (f"MorrisLecar(C={self.C}, VL={self.VL}, VCa={self.VCa}, VK={self.VK}, "
                 f"gL={self.gL}), gCa={self.gCa}, gK={self.gK}, V1={self.V1}, V2={self.V2}, "
-                f"V3={self.V3}, V4={self.V4}, phi={self.phi}, dt={self.dt}, time={self.time}")
-
-    @property
-    def tvec(self):
-        """
-        Calculates a time vector tvec.
-        """
-        return np.arange(0, self.time, self.dt)
+                f"V3={self.V3}, V4={self.V4}, phi={self.phi}")
 
     def _system_equations(self, X, t, current):
         """
@@ -69,13 +62,19 @@ class MorrisLecar:
         return [(1 / self.C) * (current - self.gL * (X[0] - self.VL) - self.gCa * Mss * (X[0] - self.VCa) - self.gK * X[1] * (X[0] - self.VK)),
                 (Nss - X[1]) / tau]
 
-    def run(self, X0=[0, 0], current=None):
+    def run(self, X0=[0, 0], current=1, t=100, dt=0.01):
         """
-        Run the model by integrating the system numerically.
+        Runs the model.
+
+        Args:
+            X0 (list, optional): Initial values of V and N. Defaults to [0, 0].
+            current (int, optional): External current. Defaults to 1.
+            t (int, optional): Total time for the simulation. Defaults to 100.
+            dt (float, optional): Simulation step. Defaults to 0.01.
         """
-        if current is None:
-            current = self.current
-        else:
-            self.current = current
+        self.current = current
+        self.t = t
+        self.dt = dt
+        self.tvec = np.arange(0, self.t, self.dt)
         X = odeint(self._system_equations, X0, self.tvec, (current,))
         self.V, self.N = X[:, 0], X[:, 1]

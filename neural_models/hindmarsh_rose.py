@@ -19,10 +19,7 @@ class HindmarshRose:
             r (int, float): Positive parameter.
             s (int, float): Positive parameter.
             x1 (int, float): Resting potential.
-            dt (int, float): Simulation step.
-            time (int): Total time for the simulation.
         """
-        self.current = kwargs.get("current", 1)
         self.a = kwargs.get("a", 0.5)
         self.b = kwargs.get("b", 0.5)
         self.c = kwargs.get("c", 0.5)
@@ -30,21 +27,19 @@ class HindmarshRose:
         self.r = kwargs.get("r", 1)
         self.s = kwargs.get("s", 1)
         self.x1 = kwargs.get("x1", -1)
-        self.dt = kwargs.get("dt", 0.01)
-        self.time = kwargs.get("time", 100)
+        self.x = None
+        self.y = None
+        self.z = None
+        self.current = None
+        self.t = None
+        self.dt = None
+        self.tvec = None
 
     def __repr__(self):
         """
         Visualize model parameters when printing.
         """
-        return (f"HindmarshRose(a={self.a}, b={self.b}, c={self.c}, d={self.d}, dt={self.dt}, time={self.time})")
-
-    @property
-    def tvec(self):
-        """
-        Calculates a time vector tvec.
-        """
-        return np.arange(0, self.time, self.dt)
+        return (f"HindmarshRose(a={self.a}, b={self.b}, c={self.c}, d={self.d})")
 
     def _system_equations(self, X, t, current):
         """
@@ -54,13 +49,19 @@ class HindmarshRose:
                 self.c - self.d * (X[0]**2) - X[1],
                 self.r * (self.s * (X[0] - self.x1) - X[2])]
 
-    def run(self, X0=[0, 0, 0], current=None):
+    def run(self, X0=[0, 0, 0], current=1, t=100, dt=0.01):
         """
-        Run the model by integrating the system numerically.
+        Runs the model.
+
+        Args:
+            X0 (list, optional): Initial values of x, y and z. Defaults to [0, 0, 0].
+            current (int, optional): External current. Defaults to 1.
+            t (int, optional): Total time for the simulation. Defaults to 100.
+            dt (float, optional): Simulation step. Defaults to 0.01.
         """
-        if current is None:
-            current = self.current
-        else:
-            self.current = current
+        self.current = current
+        self.t = t
+        self.dt = dt
+        self.tvec = np.arange(0, self.t, self.dt)
         X = odeint(self._system_equations, X0, self.tvec, (current,))
         self.x, self.y, self.z = X[:, 0], X[:, 1], X[:, 2]

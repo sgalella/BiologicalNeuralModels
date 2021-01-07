@@ -39,30 +39,13 @@ class LeakyIntegrateAndFire:
         """
         return np.arange(0, self.t, self.dt)
 
-    @property
-    def period(self):
-        """
-        Calculates the period given the model parameters.
-        """
-        return - self.tau * np.log(1 - (self.theta - self.VR) / (self.R * self.current))
-
-    @property
-    def frequency(self):
-        """
-        Calculates the frequency given the period.
-        """
-        return 1 / self.period
-
     def __repr__(self):
         """
         Visualize model parameters when printing.
         """
         return ("LeakyIntegrateAndFire(VR={}, R={}, C={}, tau={}, "
-                "I={}, theta={}, dt={}, t={}, "
-                "T={}, f={})").format(self.VR, self.R, self.C, self.tau,
-                                      self.current, self.theta, self.dt, self.t,
-                                      round(self.period, 3),
-                                      round(self.frequency, 3))
+                "I={}, theta={}, dt={}, t={}, ").format(self.VR, self.R, self.C, self.tau,
+                                                        self.current, self.theta, self.dt, self.t)
 
     def run(self):
         """

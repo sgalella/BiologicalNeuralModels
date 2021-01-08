@@ -1,4 +1,3 @@
-import matplotlib.pyplot as plt
 from scipy.integrate import solve_ivp
 
 
@@ -59,55 +58,3 @@ class Izhikevich:
         self.tvec = s.t
         self.V = s.y[0, :]
         self.U = s.y[1, :]
-
-
-def main():
-    # Parameters
-    t = 200
-    current = 10
-    Y0 = [-65, 0]
-
-    # Regular Spiking (RS) Neuron
-    RS_model = Izhikevich(a=0.02, b=0.2, c=-65, d=8)
-    RS_model.run(t, current, Y0)
-
-    # Intrinsically Bursting (RS) Neuron
-    IB_model = Izhikevich(a=0.02, b=0.2, c=-55, d=4)
-    IB_model.run(t, current, Y0)
-
-    # Chattering (CH) Neuron
-    CH_model = Izhikevich(a=0.02, b=0.2, c=-50, d=2)
-    CH_model.run(t, current, Y0)
-
-    # Fast Spiking (FS) Neuron
-    FS_model = Izhikevich(a=0.1, b=0.2, c=-65, d=2)
-    FS_model.run(t, current, Y0)
-
-    # Plots
-    fig, ax = plt.subplots(2, 2, figsize=(7, 6))
-    ax[0, 0].plot(RS_model.tvec, RS_model.V, 'r')
-    ax[0, 0].set_xlabel('time (s)')
-    ax[0, 0].set_ylabel('voltage (mv)')
-    ax[0, 0].set_title('Regular Spiking (RS)')
-
-    ax[0, 1].plot(IB_model.tvec, IB_model.V, 'g')
-    ax[0, 1].set_xlabel('time (s)')
-    ax[0, 1].set_ylabel('voltage (mv)')
-    ax[0, 1].set_title('Intrinsically Bursting (IB)')
-
-    ax[1, 0].plot(CH_model.tvec, CH_model.V, 'b')
-    ax[1, 0].set_xlabel('time (s)')
-    ax[1, 0].set_ylabel('voltage (mv)')
-    ax[1, 0].set_title('Chattering (CH)')
-
-    ax[1, 1].plot(FS_model.tvec, FS_model.V, 'm')
-    ax[1, 1].set_xlabel('time (s)')
-    ax[1, 1].set_ylabel('voltage (mv)')
-    ax[1, 1].set_title('Fast Spiking (FS)')
-
-    plt.subplots_adjust(wspace=0.4, hspace=0.4)
-    plt.show()
-
-
-if __name__ == '__main__':
-    main()

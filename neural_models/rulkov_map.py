@@ -20,7 +20,7 @@ class RulkovMap:
         self.mu = kwargs.get("mu", 0.1)
         self.sigma = kwargs.get("sigma", 0.3)
         self.x0 = kwargs.get("x0", 0)
-        self.y0 = kwargs.get("x0", 0)
+        self.y0 = kwargs.get("y0", 0)
         self.x = None
         self.y = None
         self.t = None

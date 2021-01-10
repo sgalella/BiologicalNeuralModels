@@ -14,11 +14,9 @@ class FitzHughNagumo:
             a (int, float): Variable a.
             b (int, float): Variable b.
             phi (int, float): Variable phi.
-            I (int, float): External current.
         """
         self.a = kwargs.get("a", -0.7)
         self.b = kwargs.get("b", 0.8)
-        self.current = kwargs.get("current", 0.5)
         self.phi = kwargs.get("phi", 12.5)
         self.V = None
         self.W = None

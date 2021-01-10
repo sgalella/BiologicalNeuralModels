@@ -11,7 +11,6 @@ class HindmarshRose:
         Initializes the model.
 
         Args:
-            current (int, float): External current.
             a (int, float): Positive parameter.
             b (int, float): Positive parameter.
             c (int, float): Positive parameter.

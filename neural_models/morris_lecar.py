@@ -25,7 +25,6 @@ class MorrisLecar:
             phi (int, float): Time scale recovery.
         """
         self.C = kwargs.get("C", 20)
-        self.current = kwargs.get("current", 1)
         self.VL = kwargs.get("VL", -60)
         self.VCa = kwargs.get("VCa", 120)
         self.VK = kwargs.get("VK", -84)

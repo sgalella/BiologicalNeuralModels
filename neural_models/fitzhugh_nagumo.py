@@ -6,7 +6,7 @@ class FitzHughNagumo:
     """
     Creates a FitzHugh-Nagumo model.
     """
-    def __init__(self, **kwargs):
+    def __init__(self, a=-0.7, b=0.8, phi=12.5):
         """
         Initializes the model.
 
@@ -15,9 +15,9 @@ class FitzHughNagumo:
             b (int, float): Variable b.
             phi (int, float): Variable phi.
         """
-        self.a = kwargs.get("a", -0.7)
-        self.b = kwargs.get("b", 0.8)
-        self.phi = kwargs.get("phi", 12.5)
+        self.a = a
+        self.b = b
+        self.phi = phi
         self.V = None
         self.W = None
         self.current = None

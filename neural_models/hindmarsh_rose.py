@@ -6,7 +6,7 @@ class HindmarshRose:
     """
     Creates a HindmarshRose model.
     """
-    def __init__(self, **kwargs):
+    def __init__(self, a=0.5, b=0.5, c=0.5, d=0.5, r=1, s=1, x1=-1):
         """
         Initializes the model.
 
@@ -19,13 +19,13 @@ class HindmarshRose:
             s (int, float): Positive parameter.
             x1 (int, float): Resting potential.
         """
-        self.a = kwargs.get("a", 0.5)
-        self.b = kwargs.get("b", 0.5)
-        self.c = kwargs.get("c", 0.5)
-        self.d = kwargs.get("d", 0.5)
-        self.r = kwargs.get("r", 1)
-        self.s = kwargs.get("s", 1)
-        self.x1 = kwargs.get("x1", -1)
+        self.a = a
+        self.b = b
+        self.c = c
+        self.d = d
+        self.r = r
+        self.s = s
+        self.x1 = x1
         self.x = None
         self.y = None
         self.z = None

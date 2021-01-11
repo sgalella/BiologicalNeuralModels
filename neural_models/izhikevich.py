@@ -3,7 +3,7 @@ from scipy.integrate import solve_ivp
 
 class Izhikevich:
     """ Creates a Izhikevich Model """
-    def __init__(self, a, b, c, d):
+    def __init__(self, a=0.02, b=0.2, c=-65, d=8):
         """ Initializes the model.
 
         Args:

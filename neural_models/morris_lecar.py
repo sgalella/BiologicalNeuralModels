@@ -6,7 +6,8 @@ class MorrisLecar:
     """
     Creates a MorrisLecar model.
     """
-    def __init__(self, **kwargs):
+    def __init__(self, C=20, VL=-60, VCa=120, VK=-84, gL=2, gCa=4, gK=8,
+                 V1=-1.2, V2=18, V3=12, V4=17.4, phi=0.06):
         """
         Initializes the model.
 
@@ -24,18 +25,18 @@ class MorrisLecar:
             V4 (int, float): Reciprocal of slope of Nss.
             phi (int, float): Time scale recovery.
         """
-        self.C = kwargs.get("C", 20)
-        self.VL = kwargs.get("VL", -60)
-        self.VCa = kwargs.get("VCa", 120)
-        self.VK = kwargs.get("VK", -84)
-        self.gL = kwargs.get("gL", 2)
-        self.gCa = kwargs.get("gCa", 4)
-        self.gK = kwargs.get("gK", 8)
-        self.V1 = kwargs.get("V1", -1.2)
-        self.V2 = kwargs.get("V2", 18)
-        self.V3 = kwargs.get("V3", 12)
-        self.V4 = kwargs.get("V4", 17.4)
-        self.phi = kwargs.get("phi", 0.06)
+        self.C = C
+        self.VL = VL
+        self.VCa = VCa
+        self.VK = VK
+        self.gL = gL
+        self.gCa = gCa
+        self.gK = gK
+        self.V1 = V1
+        self.V2 = V2
+        self.V3 = V3
+        self.V4 = V4
+        self.phi = phi
         self.t = None
         self.dt = None
         self.tvec = None

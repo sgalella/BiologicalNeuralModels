@@ -6,7 +6,7 @@ class HodgkinHuxley:
     """
     Creates a HodgkinHuxley model.
     """
-    def __init__(self, **kwargs):
+    def __init__(self, C=1, VNa=50, VK=-77, VL=-54.4, gNa=120, gK=36, gL=0.3):
         """
         Initializes the model.
 
@@ -19,13 +19,13 @@ class HodgkinHuxley:
             gK (int, float): Conductance K.
             gL (int, float): Conductance L.
         """
-        self.C = kwargs.get("C", 1)
-        self.VNa = kwargs.get("VNa", 50)
-        self.VK = kwargs.get("VK", -77)
-        self.VL = kwargs.get("VL", -54.4)
-        self.gNa = kwargs.get("gNa", 120)
-        self.gK = kwargs.get("gK", 36)
-        self.gL = kwargs.get("gL", 0.3)
+        self.C = C
+        self.VNa = VNa
+        self.VK = VK
+        self.VL = VL
+        self.gNa = gNa
+        self.gK = gK
+        self.gL = gL
         self.V = None
         self.m = None
         self.n = None

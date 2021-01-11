@@ -5,7 +5,7 @@ class RulkovMap:
     """
     Creates a Rulkov Map model.
     """
-    def __init__(self, **kwargs):
+    def __init__(self, alpha=6, mu=0.1, sigma=0.3, x0=0, y0=0):
         """
         Initializes the model.
 
@@ -16,11 +16,11 @@ class RulkovMap:
             x0 (int, float): Intial value for the membrane potential.
             y0 (int, float): Initial value for the slow dynamics.
         """
-        self.alpha = kwargs.get("alpha", 6)
-        self.mu = kwargs.get("mu", 0.1)
-        self.sigma = kwargs.get("sigma", 0.3)
-        self.x0 = kwargs.get("x0", 0)
-        self.y0 = kwargs.get("y0", 0)
+        self.alpha = alpha
+        self.mu = mu
+        self.sigma = sigma
+        self.x0 = x0
+        self.y0 = y0
         self.x = None
         self.y = None
         self.t = None

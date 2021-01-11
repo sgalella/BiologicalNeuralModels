@@ -5,7 +5,7 @@ class LeakyIntegrateAndFire:
     """
     Creates an integrate-and-fire model.
     """
-    def __init__(self, **kwargs):
+    def __init__(self, VR=-70, R=100, C=0.3, theta=-55):
         """
         Initializes the model.
         Args:
@@ -13,10 +13,10 @@ class LeakyIntegrateAndFire:
             R (int, float): Resistance of the cell membrane.
             C (int, float): Capacitance of the cell membrane.
         """
-        self.VR = kwargs.get("VR", -70)
-        self.R = kwargs.get("R", 100)
-        self.C = kwargs.get("C", 0.3)
-        self.theta = kwargs.get("theta", -55)
+        self.VR = VR
+        self.R = R
+        self.C = C
+        self.theta = theta
         self.t = None
         self.dt = None
         self.tvec = None

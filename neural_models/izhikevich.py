@@ -24,7 +24,7 @@ class Izhikevich:
         """
         Visualize model parameters when printing.
         """
-        return f'Izhikevich(a={self.a}, b={self.b}, c={self.c}, d={self.d}'
+        return f'Izhikevich(a={self.a}, b={self.b}, c={self.c}, d={self.d})'
 
     def _systems_equations(self, t, X, current):
         """

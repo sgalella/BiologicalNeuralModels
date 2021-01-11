@@ -29,8 +29,7 @@ class FitzHughNagumo:
         """
         Visualize model parameters when printing.
         """
-        return ("FitzHughNagumo(a={}, b={}, "
-                "current={}, phi={})").format(self.a, self.b, self.current, self.phi)
+        return f'FitzHughNagumo(a={self.a}, b={self.b}, current={self.current}, phi={self.phi})'
 
     def _system_equations(self, X, t, current):
         """

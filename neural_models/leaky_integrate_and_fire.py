@@ -26,8 +26,7 @@ class LeakyIntegrateAndFire:
         """
         Visualize model parameters when printing.
         """
-        return ("LeakyIntegrateAndFire(VR={}, R={}, C={}, "
-                "theta={}").format(self.VR, self.R, self.C, self.theta)
+        return f'LeakyIntegrateAndFire(VR={self.VR}, R={self.R}, C={self.C}, theta={self.theta}")'
 
     def run(self, current=1, t=100, dt=0.01):
         """

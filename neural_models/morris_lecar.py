@@ -47,9 +47,9 @@ class MorrisLecar:
         """
         Visualize model parameters when printing.
         """
-        return (f"MorrisLecar(C={self.C}, VL={self.VL}, VCa={self.VCa}, VK={self.VK}, "
-                f"gL={self.gL}), gCa={self.gCa}, gK={self.gK}, V1={self.V1}, V2={self.V2}, "
-                f"V3={self.V3}, V4={self.V4}, phi={self.phi}")
+        return (f'MorrisLecar(C={self.C}, VL={self.VL}, VCa={self.VCa}, VK={self.VK}, '
+                f'gL={self.gL}), gCa={self.gCa}, gK={self.gK}, V1={self.V1}, V2={self.V2}, '
+                f'V3={self.V3}, V4={self.V4}, phi={self.phi}')
 
     def _system_equations(self, X, t, current):
         """

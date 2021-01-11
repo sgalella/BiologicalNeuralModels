@@ -30,7 +30,7 @@ class RulkovMap:
         """
         Visualize model parameters when printing.
         """
-        return (f"RulkovModel(alpha={self.alpha}, mu={self.mu}, sigma={self.sigma})")
+        return f'RulkovModel(alpha={self.alpha}, mu={self.mu}, sigma={self.sigma})'
 
     def run(self, t=100):
         """

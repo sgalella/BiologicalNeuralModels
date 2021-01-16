@@ -35,8 +35,8 @@ class HodgkinHuxley:
         """
         Visualize model parameters when printing.
         """
-        return ('HodgkinHuxley(C={self.C}, VNa={self.VNa}, VK={self.VK}, VL={self.VL}, '
-                'gNa={self.gNa}, gK={self.gK}), gL={self.gL})')
+        return (f'HodgkinHuxley(C={self.C}, VNa={self.VNa}, VK={self.VK}, VL={self.VL}, '
+                f'gNa={self.gNa}, gK={self.gK}, gL={self.gL})')
 
     def _system_equations(self, X, t, current):
         """

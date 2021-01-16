@@ -38,7 +38,8 @@ class HindmarshRose:
         """
         Visualize model parameters when printing.
         """
-        return f'HindmarshRose(a={self.a}, b={self.b}, c={self.c}, d={self.d})'
+        return (f'HindmarshRose(a={self.a}, b={self.b}, c={self.c}, d={self.d}, '
+                f'r={self.r}, s={self.s}, x1={self.x1})')
 
     def _system_equations(self, X, t, current):
         """

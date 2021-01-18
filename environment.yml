@@ -1,0 +1,9 @@
+name: biological-neural-models
+dependencies:
+  - python=3.6
+  - jupyterlab
+  - pip
+  - pip:
+    - matplotlib==3.1.3
+    - numpy==1.18.1
+    - scipy==1.4.1

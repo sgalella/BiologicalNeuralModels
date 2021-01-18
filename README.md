@@ -1,5 +1,5 @@
 # Biological Neural Models
-Collection of  different [biological neuron models](https://en.wikipedia.org/wiki/Biological_neuron_model):
+Collection of different [biological neuron models](https://en.wikipedia.org/wiki/Biological_neuron_model) implemented in Python. 
 
 1. FitzHugh-Nagumo model [[Paper]](https://www.sciencedirect.com/science/article/pii/S0006349561869026) [[Info]](https://en.wikipedia.org/wiki/FitzHugh–Nagumo_model)
 2. Hindmarsh-Rose model [[Paper]](https://royalsocietypublishing.org/doi/10.1098/rspb.1984.0024) [[Info]](https://en.wikipedia.org/wiki/Hindmarsh–Rose_model)
@@ -21,6 +21,19 @@ To install the dependencies, run the following command:
 ```bash
 pip install -r requirements.txt
 ```
+
+If using Conda, you can also create an environment with the requirements:
+
+```bash
+conda env create -f environment.yml
+```
+
+By default the environment name is `biological-neural-models`. To activate it run:
+
+```bash
+conda activate biological-neural-models
+```
+
 
 
 ## Usage

@@ -8,6 +8,7 @@ Collection of different [biological neuron models](https://en.wikipedia.org/wiki
 5. Izhikevich model [[Paper]](https://www.izhikevich.org/publications/spikes.pdf) [[Info]](https://www.izhikevich.org/publications/spikes.htm)
 6. Morris-Lecar model [[Paper]](http://jaguar.biologie.hu-berlin.de/downloads/Fachkurs/SS2010/Morris_Lecar_1981) [[Info]](https://en.wikipedia.org/wiki/Morris–Lecar_model)
 7. Rulkov map [[Paper]](https://journals.aps.org/pre/abstract/10.1103/PhysRevE.65.041922) [[Info]](https://en.wikipedia.org/wiki/Rulkov_map)
+8. Chialvo map [[Paper]](http://chialvo.org/files/xb-1995-chialvo.pdf)
 
 <p align="center">
     <img width="500" height="300"src="images/morris-lecar-hopf.gif">

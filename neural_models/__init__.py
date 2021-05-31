@@ -5,3 +5,4 @@ from .leaky_integrate_and_fire import LeakyIntegrateAndFire
 from .morris_lecar import MorrisLecar
 from .rulkov_map import RulkovMap
 from .izhikevich import Izhikevich
+from .chialvo_map import ChialvoMap
